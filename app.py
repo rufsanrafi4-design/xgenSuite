@@ -59,13 +59,34 @@ except ImportError:
 
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 
-from transcriber import transcribe_video
-from proxy_manager import (
-    get_all_data as proxy_get_all, add_proxy, remove_proxy,
-    add_channel as proxy_add_channel, remove_channel as proxy_remove_channel,
-    assign_proxy_to_channel, health_check as proxy_health_check,
-    kill_switch_check, save_proxy_data, check_ip_direct
-)
+try:
+    from transcriber import transcribe_video
+    HAS_TRANSCRIBER = True
+except ImportError:
+    HAS_TRANSCRIBER = False
+    def transcribe_video(*args, **kwargs):
+        return None
+
+try:
+    from proxy_manager import (
+        get_all_data as proxy_get_all, add_proxy, remove_proxy,
+        add_channel as proxy_add_channel, remove_channel as proxy_remove_channel,
+        assign_proxy_to_channel, health_check as proxy_health_check,
+        kill_switch_check, save_proxy_data, check_ip_direct
+    )
+    HAS_PROXY_MANAGER = True
+except ImportError:
+    HAS_PROXY_MANAGER = False
+    def proxy_get_all(): return {}
+    def add_proxy(*args, **kwargs): pass
+    def remove_proxy(*args, **kwargs): pass
+    def proxy_add_channel(*args, **kwargs): pass
+    def proxy_remove_channel(*args, **kwargs): pass
+    def assign_proxy_to_channel(*args, **kwargs): pass
+    def proxy_health_check(*args, **kwargs): pass
+    def kill_switch_check(*args, **kwargs): pass
+    def save_proxy_data(*args, **kwargs): pass
+    def check_ip_direct(*args, **kwargs): pass
 
 
 # ═══════════════════════════════════════════════════════════
