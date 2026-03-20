@@ -1,0 +1,7 @@
+{
+  "auto_delete_originals": true,
+  "cleanup_days": 7,
+  "pitch_semitones": 1,
+  "speed_variation_pct": 1.5,
+  "groq_api_key": "YOUR_GROQ_API_KEY_HERE"
+}

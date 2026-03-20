@@ -1,0 +1,534 @@
+{
+  "version": "2.0",
+  "canvas": {
+    "width": "root_w",
+    "height": "root_h"
+  },
+  "templates": {
+    "split_screen": {
+      "display_name": "Split-Screen (Classic)",
+      "description": "Main video left, reaction right, title bars top/bottom",
+      "requires_reaction": true,
+      "compose_mode": "hstack",
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "bar_h",
+          "width": "root_w * 0.49",
+          "height": "root_h - (bar_h * 2)",
+          "crop_pct": 8,
+          "hflip": true
+        },
+        "reaction_video": {
+          "x": "(root_w * 0.49) + divider_w",
+          "y": "bar_h",
+          "width": "root_w - (root_w * 0.49) - divider_w",
+          "height": "root_h - (bar_h * 2)",
+          "crop_pct": 0,
+          "hflip": false,
+          "loop": true
+        },
+        "divider": {
+          "x": "root_w * 0.49",
+          "y": "bar_h",
+          "width": "divider_w",
+          "height": "root_h - (bar_h * 2)",
+          "color": "0x7c3aed"
+        }
+      },
+      "constants": {
+        "bar_h": "root_h * 0.055",
+        "divider_w": "root_w * 0.012"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "bar_h",
+          "bg_color": "0x0d0d1a",
+          "text_field": "title",
+          "font_size": "root_h * 0.032",
+          "font_color": "white"
+        },
+        "bottom_bar": {
+          "y": "root_h - bar_h",
+          "height": "bar_h",
+          "bg_color": "0x0d0d1a",
+          "text": "Like and Subscribe",
+          "font_size": "root_h * 0.028",
+          "font_color": "0xa78bfa"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 55,
+        "contrast": 1.10,
+        "saturation": 1.12,
+        "rotation_sway_rad": 0.002,
+        "rotation_sway_period": 7,
+        "noise_strength": 2
+      }
+    },
+
+    "pip_corner": {
+      "display_name": "PiP Corner",
+      "description": "Full-screen main video with reaction in bottom-right corner",
+      "requires_reaction": true,
+      "compose_mode": "pip",
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "0",
+          "width": "root_w",
+          "height": "root_h",
+          "crop_pct": 8,
+          "hflip": true
+        },
+        "reaction_video": {
+          "x": "root_w - pip_w - pip_margin",
+          "y": "root_h - pip_h - pip_margin",
+          "width": "pip_w",
+          "height": "pip_h",
+          "crop_pct": 0,
+          "hflip": false,
+          "loop": true,
+          "border": {
+            "width": "max(2, root_w * 0.003)",
+            "color": "0x7c3aed"
+          }
+        }
+      },
+      "constants": {
+        "pip_w": "root_w * 0.26",
+        "pip_h": "root_h * 0.37",
+        "pip_margin": "root_w * 0.02"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "root_h * 0.05",
+          "bg_color": "0x0d0d1a",
+          "text_field": "title",
+          "font_size": "root_h * 0.032",
+          "font_color": "white"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 55,
+        "contrast": 1.10,
+        "saturation": 1.12,
+        "rotation_sway_rad": 0.002,
+        "rotation_sway_period": 7,
+        "noise_strength": 2
+      }
+    },
+
+    "cinema_bars": {
+      "display_name": "Cinema Bars (Widescreen)",
+      "description": "2.39:1 cinematic letterbox with thick black bars, no reaction needed",
+      "requires_reaction": false,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "cinema_bar_h",
+          "width": "root_w",
+          "height": "root_h - (cinema_bar_h * 2)",
+          "crop_pct": 8,
+          "hflip": true
+        }
+      },
+      "constants": {
+        "cinema_bar_h": "root_h * 0.128"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "cinema_bar_h",
+          "bg_color": "0x000000",
+          "text_field": "title",
+          "font_size": "root_h * 0.035",
+          "font_color": "white",
+          "text_y": "cinema_bar_h * 0.35"
+        },
+        "bottom_bar": {
+          "y": "root_h - cinema_bar_h",
+          "height": "cinema_bar_h",
+          "bg_color": "0x000000",
+          "text": "Like and Subscribe",
+          "font_size": "root_h * 0.030",
+          "font_color": "0xa78bfa",
+          "text_y": "(root_h - cinema_bar_h) + cinema_bar_h * 0.35"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 55,
+        "contrast": 1.10,
+        "saturation": 1.12,
+        "rotation_sway_rad": 0.002,
+        "rotation_sway_period": 7,
+        "noise_strength": 2
+      }
+    },
+
+    "full_evasion": {
+      "display_name": "Full Evasion (Max Stealth)",
+      "description": "Full-screen, no reaction, all evasion techniques at maximum intensity",
+      "requires_reaction": false,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "bar_h",
+          "width": "root_w",
+          "height": "root_h - (bar_h * 2)",
+          "crop_pct": 12,
+          "hflip": true
+        }
+      },
+      "constants": {
+        "bar_h": "root_h * 0.055"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "bar_h",
+          "bg_color": "0x0d0d1a",
+          "text_field": "title",
+          "font_size": "root_h * 0.032",
+          "font_color": "white"
+        },
+        "bottom_bar": {
+          "y": "root_h - bar_h",
+          "height": "bar_h",
+          "bg_color": "0x0d0d1a",
+          "text": "Like and Subscribe",
+          "font_size": "root_h * 0.028",
+          "font_color": "0xa78bfa"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 80,
+        "contrast": 1.15,
+        "saturation": 1.18,
+        "rotation_sway_rad": 0.004,
+        "rotation_sway_period": 5,
+        "noise_strength": 4
+      }
+    },
+
+    "shorts_vertical": {
+      "display_name": "Shorts (9:16 Vertical)",
+      "description": "Full-screen vertical for YouTube Shorts, big text, no reaction needed",
+      "requires_reaction": false,
+      "force_portrait": true,
+      "output_w": 1080,
+      "output_h": 1920,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "top_bar_h",
+          "width": "root_w",
+          "height": "root_h - top_bar_h - bot_bar_h",
+          "crop_pct": 6,
+          "hflip": true
+        }
+      },
+      "constants": {
+        "top_bar_h": "root_h * 0.06",
+        "bot_bar_h": "root_h * 0.08"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "top_bar_h",
+          "bg_color": "0x0d0d1a",
+          "text_field": "title",
+          "font_size": "root_h * 0.028",
+          "font_color": "white"
+        },
+        "bottom_bar": {
+          "y": "root_h - bot_bar_h",
+          "height": "bot_bar_h",
+          "bg_color": "0x0d0d1a",
+          "text": "Follow for more",
+          "font_size": "root_h * 0.025",
+          "font_color": "0xa78bfa"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 45,
+        "contrast": 1.08,
+        "saturation": 1.10,
+        "rotation_sway_rad": 0.001,
+        "rotation_sway_period": 8,
+        "noise_strength": 1
+      }
+    },
+
+    "phantom_grade": {
+      "display_name": "Phantom Grade (10000-Year)",
+      "description": "Maximum hidden evasion, 9 layers deep, cinematic quality, no reaction needed",
+      "requires_reaction": false,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "bar_h",
+          "width": "root_w",
+          "height": "root_h - (bar_h * 2)",
+          "crop_pct": 7,
+          "hflip": true
+        }
+      },
+      "constants": {
+        "bar_h": "root_h * 0.048"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "bar_h",
+          "bg_color": "0x08080f",
+          "text_field": "title",
+          "font_size": "root_h * 0.030",
+          "font_color": "0xe8e8ff"
+        },
+        "bottom_bar": {
+          "y": "root_h - bar_h",
+          "height": "bar_h",
+          "bg_color": "0x08080f",
+          "text": "Like and Subscribe",
+          "font_size": "root_h * 0.024",
+          "font_color": "0x8b5cf6"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 42,
+        "contrast": 1.12,
+        "saturation": 1.15,
+        "rotation_sway_rad": 0.0015,
+        "rotation_sway_period": 9,
+        "noise_strength": 1,
+
+        "colorbalance_rs": -0.08,
+        "colorbalance_gs": 0.05,
+        "colorbalance_bs": 0.12,
+        "colorbalance_rm": 0.04,
+        "colorbalance_gm": -0.03,
+        "colorbalance_bm": 0.06,
+        "colorbalance_rh": 0.06,
+        "colorbalance_gh": 0.02,
+        "colorbalance_bh": -0.04,
+
+        "rgbashift_rh": 2,
+        "rgbashift_rv": -1,
+        "rgbashift_bh": -2,
+        "rgbashift_bv": 1,
+
+        "unsharp_lx": 5,
+        "unsharp_ly": 5,
+        "unsharp_la": 0.8,
+
+        "tblend_mode": "average",
+        "tblend_opacity": 0.08
+      }
+    },
+
+    "god_mode": {
+      "display_name": "God Mode (20000-Year)",
+      "description": "13-layer deep evasion, cinematic grade, world-class stealth, no reaction needed",
+      "requires_reaction": false,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "bar_h",
+          "width": "root_w",
+          "height": "root_h - (bar_h * 2)",
+          "crop_pct": 6,
+          "hflip": true
+        }
+      },
+      "constants": {
+        "bar_h": "root_h * 0.042"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "bar_h",
+          "bg_color": "0x050510",
+          "text_field": "title",
+          "font_size": "root_h * 0.028",
+          "font_color": "0xf0f0ff"
+        },
+        "bottom_bar": {
+          "y": "root_h - bar_h",
+          "height": "bar_h",
+          "bg_color": "0x050510",
+          "text": "Like and Subscribe",
+          "font_size": "root_h * 0.022",
+          "font_color": "0x9b7cfa"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 30,
+        "contrast": 1.05,
+        "saturation": 1.06,
+        "rotation_sway_rad": 0.0008,
+        "rotation_sway_period": 12,
+        "noise_strength": 1,
+
+        "colorbalance_rs": -0.03,
+        "colorbalance_gs": 0.02,
+        "colorbalance_bs": 0.05,
+        "colorbalance_rm": 0.02,
+        "colorbalance_gm": -0.01,
+        "colorbalance_bm": 0.03,
+        "colorbalance_rh": 0.03,
+        "colorbalance_gh": 0.01,
+        "colorbalance_bh": -0.02,
+
+        "rgbashift_rh": 1,
+        "rgbashift_rv": -1,
+        "rgbashift_bh": -1,
+        "rgbashift_bv": 1,
+
+        "unsharp_lx": 3,
+        "unsharp_ly": 3,
+        "unsharp_la": 0.3,
+
+        "tblend_mode": "average",
+        "tblend_opacity": 0.03,
+
+        "curves_master": "0/0 0.25/0.27 0.5/0.52 0.75/0.76 1/1",
+
+        "perspective_x0": 1,
+        "perspective_y0": 0,
+        "perspective_x1": -1,
+        "perspective_y1": 0,
+        "perspective_x2": 0,
+        "perspective_y2": 0,
+        "perspective_x3": 0,
+        "perspective_y3": 1,
+
+        "smartblur_lr": 1.0,
+        "smartblur_ls": 0.3,
+        "smartblur_lt": 5,
+
+        "lowpass_audio_freq": 15500
+      }
+    },
+
+    "fb_ig_reels": {
+      "display_name": "FB & IG Reels (20000-Year No-Flip)",
+      "description": "Extreme 13-layer evasion for Reels. No mirroring, pristine 9:16 vertical quality.",
+      "requires_reaction": false,
+      "force_portrait": true,
+      "output_w": 1080,
+      "output_h": 1920,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "bar_h",
+          "width": "root_w",
+          "height": "root_h - (bar_h * 2)",
+          "crop_pct": 8,
+          "hflip": false
+        }
+      },
+      "constants": {
+        "bar_h": "root_h * 0.04"
+      },
+      "overlays": {
+        "top_bar": {
+          "y": "0",
+          "height": "bar_h",
+          "bg_color": "0x000005",
+          "text_field": "title",
+          "font_size": "root_h * 0.026",
+          "font_color": "0xffffee"
+        },
+        "bottom_bar": {
+          "y": "root_h - bar_h",
+          "height": "bar_h",
+          "bg_color": "0x000005",
+          "text": "Follow for more",
+          "font_size": "root_h * 0.022",
+          "font_color": "0x4ade80"
+        }
+      },
+      "visual_evasion": {
+        "hue_rotate": 35,
+        "contrast": 1.05,
+        "saturation": 1.08,
+        "rotation_sway_rad": 0.001,
+        "rotation_sway_period": 14,
+        "noise_strength": 1,
+
+        "colorbalance_rs": 0.03,
+        "colorbalance_gs": -0.02,
+        "colorbalance_bs": 0.04,
+        "colorbalance_rm": 0.02,
+        "colorbalance_gm": 0.01,
+        "colorbalance_bm": -0.02,
+        "colorbalance_rh": -0.02,
+        "colorbalance_gh": 0.03,
+        "colorbalance_bh": 0.04,
+
+        "rgbashift_rh": -1,
+        "rgbashift_rv": 1,
+        "rgbashift_bh": 1,
+        "rgbashift_bv": -1,
+
+        "unsharp_lx": 3,
+        "unsharp_ly": 3,
+        "unsharp_la": 0.4,
+
+        "tblend_mode": "average",
+        "tblend_opacity": 0.04,
+
+        "curves_master": "0/0 0.25/0.26 0.5/0.51 0.75/0.77 1/1",
+
+        "perspective_x0": 0,
+        "perspective_y0": 1,
+        "perspective_x1": -1,
+        "perspective_y1": 0,
+        "perspective_x2": 1,
+        "perspective_y2": 0,
+        "perspective_x3": 0,
+        "perspective_y3": -1,
+
+        "smartblur_lr": 1.2,
+        "smartblur_ls": 0.4,
+        "smartblur_lt": 4,
+
+        "lowpass_audio_freq": 15000
+      }
+    },
+
+    "reels_pro": {
+      "display_name": "Reels Pro (9:16 Vertical)",
+      "description": "Main video on top, your reaction on bottom. Full-width vertical split for FB/IG/TikTok/YT Shorts.",
+      "requires_reaction": true,
+      "compose_mode": "vstack",
+      "clean_main": true,
+      "force_portrait": true,
+      "output_w": 1080,
+      "output_h": 1920,
+      "layout": {
+        "main_video": {
+          "x": "0",
+          "y": "0",
+          "width": "root_w",
+          "height": "root_h * 0.55",
+          "crop_pct": 0,
+          "hflip": false
+        },
+        "reaction_video": {
+          "x": "0",
+          "y": "0",
+          "width": "root_w",
+          "height": "root_h * 0.45",
+          "fill_mode": "cover"
+        }
+      },
+      "constants": {},
+      "overlays": {},
+      "visual_evasion": {}
+    }
+  }
+}
